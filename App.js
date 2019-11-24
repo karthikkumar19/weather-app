@@ -1,26 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'weather-icons/css/weather-icons.css';
+import Weather from './app_component/weather_component';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+//api call api api.openweathermap.org/data/2.5/weather?q=London,uk
+const API_key ="e890e5f43e3114ad60f6c64ccacbd4e3";
+
+class App extends React.Component{
+  state={}
+  render(){
+    return(
+<div className="App">
+     <Weather/>
     </div>
-  );
+
+    );
+  }
 }
+
+
+
 
 export default App;
