@@ -3,6 +3,7 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'weather-icons/css/weather-icons.css';
 import Weather from './app_component/weather_component';
+import Form from './app_component/form.component';
 import './App.css';
 
 //api call api api.openweathermap.org/data/2.5/weather?q=London,uk
@@ -10,7 +11,9 @@ const API_key ="e890e5f43e3114ad60f6c64ccacbd4e3";
 
 class App extends React.Component{
   state={
-    posts:[],temp:[],desc:[],weathericon:undefined
+    posts:[],temp:[],desc:[],id:null,
+    weathericon:undefined,
+    getweather:false
   };
 
 get_weather =(rangeid)=>{
@@ -54,11 +57,20 @@ calCelsius(temp){
   return cell;
 }
 
+gettingweather=(id)=>{
+  // e.preventDefault();
+// let state = this.state.getweather;
+// //  id = this.state.id;
+// console.log(this.state.getweather);
+console.log(id);
+// this.setState({getweather:!state,id:id});
+console.log("true is updated"+ id);
+}
 
 
-  componentDidMount(){
+  componentDidMount (){
     axios.get(
-      'http://api.openweathermap.org/data/2.5/weather?q=Jammu&APPID=e890e5f43e3114ad60f6c64ccacbd4e3'
+      'http://api.openweathermap.org/data/2.5/weather?q=Leh&APPID=e890e5f43e3114ad60f6c64ccacbd4e3'
       )
     .then(response => {
       const posts = response.data;
@@ -67,14 +79,20 @@ calCelsius(temp){
       console.log(response.data);
       this.setState({posts:posts, temp: temp, desc: desc});
       this.get_weather(desc.id);
+      
           });
-  }
+        }
   render(){
+    
     return(
 <div className="App">
-     <Weather name={this.state.posts.name} temp={this.calCelsius(this.state.temp.temp)}
+  <Form gettingweather={this.gettingweather.bind(this,"che")}/>
+  {
+  this.state.getweather ? 
+      <Weather name={this.state.posts.name} temp={this.calCelsius(this.state.temp.temp)}
       min={this.calCelsius(this.state.temp.temp_min)} max={this.calCelsius(this.state.temp.temp_max)}
-      desc={this.state.desc.main} className={this.state.weathericon}/>
+      desc={this.state.desc.main} className={this.state.weathericon}/> : null
+  }
     </div>
 
     );

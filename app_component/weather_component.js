@@ -3,7 +3,7 @@ import React from 'react';
 const weather =(props) =>{
     return(
         <div className="container">
-            <div className="cards">
+            <div className="cards pt-4">
             <h1>{props.name}</h1>
             <h5 className="py-4">
             <i className={props.className}/>
