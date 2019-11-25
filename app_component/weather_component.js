@@ -6,7 +6,7 @@ const weather =(props) =>{
             <div className="cards">
             <h1>{props.name}</h1>
             <h5 className="py-4">
-            <i class="wi wi-day-sunny display-1"></i>
+            <i className={props.className}/>
             </h5>
             <h1 className="py-2">
                 {props.temp}&deg;
