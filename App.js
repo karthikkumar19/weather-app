@@ -13,6 +13,32 @@ class App extends React.Component{
     posts:[],temp:[],desc:[],weathericon:undefined
   };
 
+get_weather =(rangeid)=>{
+  console.log(rangeid);
+  if(rangeid >= 200 && rangeid <= 232){
+    this.setState({weathericon:this.weathericon.Thunderstorm});
+  }
+  else if(rangeid >=300 && rangeid <=321){
+  this.setState({weathericon:this.weathericon.Drizzle});
+  }
+  else if(rangeid >=500 && rangeid <=531){
+    this.setState({weathericon:this.weathericon.Rain});
+    }
+    else if(rangeid >=600 && rangeid <=622){
+      this.setState({weathericon:this.weathericon.Snow});
+      }
+      else if(rangeid >=701 && rangeid <=781){
+        this.setState({weathericon:this.weathericon.Atmosphere});
+        }
+        else if(rangeid === 800){
+          this.setState({weathericon:this.weathericon.Clear});
+          }
+        else if(rangeid >=801 && rangeid <=804){
+          this.setState({weathericon:this.weathericon.Clouds});
+          }
+
+}
+
   weathericon = {
     Thunderstorm : "wi wi-thunderstorm display-1",
     Drizzle:'wi wi-sleet display-1',
@@ -28,17 +54,20 @@ calCelsius(temp){
   return cell;
 }
 
+
+
   componentDidMount(){
     axios.get(
-      'http://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=e890e5f43e3114ad60f6c64ccacbd4e3'
+      'http://api.openweathermap.org/data/2.5/weather?q=Jammu&APPID=e890e5f43e3114ad60f6c64ccacbd4e3'
       )
     .then(response => {
       const posts = response.data;
       const temp = response.data.main;
       const desc =  response.data.weather[0];
       console.log(response.data);
-      this.setState({posts:posts, temp: temp, desc: desc, weathericon:this.weathericon.Thunderstorm});
-    });
+      this.setState({posts:posts, temp: temp, desc: desc});
+      this.get_weather(desc.id);
+          });
   }
   render(){
     return(
