@@ -6,9 +6,9 @@ class Form extends React.Component{
 state={
     lang:"hello"
 }
-handleLangChange = () =>{
+handleLangChange = (e) =>{
     var lang = this.state.lang;
-    this.props.onSelectLanguage(lang);
+    this.props.onSelectLanguage(e,lang);
 }
     render(){
        

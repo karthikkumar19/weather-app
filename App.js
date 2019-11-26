@@ -10,20 +10,26 @@ import './App.css';
 const API_key ="e890e5f43e3114ad60f6c64ccacbd4e3";
 
 class App extends React.Component{
-  state={
-    clicked:false
+  constructor (props){
+    super(props);
+    this.state={
+      clicked:false
+    }
   }
-  componentDidMount(){ 
-    axios.get('http://api.openweathermap.org/data/2.5/weather?q=Madurai&APPID=e890e5f43e3114ad60f6c64ccacbd4e3')
-    .then(response => {
-        console.log(response);
-    })
+  
+//   componentDidMount(){ 
+//     axios.get('http://api.openweathermap.org/data/2.5/weather?q=Madurai&APPID=e890e5f43e3114ad60f6c64ccacbd4e3')
+//     .then(response => {
+//         console.log(response);
+//     })
 
-}
+// }
 
-handleLanguage = (e,langValue) =>{
+handleLanguage = (e,lang) =>{
   e.preventDefault();
-console.log(langValue);
+  let state = this.state.clicked;
+  this.setState({clicked:true});
+console.log(state,lang);
 
 }
 
@@ -33,8 +39,8 @@ console.log(langValue);
     
     return(
 <div className="App">
-  <Form onSelectLanguage={ this.handleLanguage} />
-  <Weather check={this.state.clicked}/>  
+  <Form onSelectLanguage={this.handleLanguage} />
+  <Weather check={this.state.clicked} name={"Leh"}/>  
     </div>
 
     );

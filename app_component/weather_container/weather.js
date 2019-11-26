@@ -6,10 +6,15 @@ class Weather extends React.Component{
 
     
     componentDidUpdate(){
-        if(this.props.check){
-        axios.get('http://api.openweathermap.org/data/2.5/weather?q=Leh&APPID=e890e5f43e3114ad60f6c64ccacbd4e3')
+        if(this.props.check != this.state.check){
+        axios.get('http://api.openweathermap.org/data/2.5/weather?q='+(this.props.name)+'&APPID=e890e5f43e3114ad60f6c64ccacbd4e3')
         .then(response => {
-            console.log(response);
+            const posts = response.data;
+            const temp = response.data.main;
+            const desc =  response.data.weather[0];
+            console.log(response.data);
+            this.setState({posts:posts, temp: temp, desc: desc,check:true});
+            this.get_weather(desc.id);
         })
         }
 }
@@ -19,7 +24,8 @@ class Weather extends React.Component{
     state={
         posts:[],temp:[],desc:[],id:null,
         weathericon:undefined,
-        getweather:false
+        getweather:false,
+        check:false
       };
     
     get_weather =(rangeid)=>{
@@ -80,12 +86,12 @@ class Weather extends React.Component{
     //       'http://api.openweathermap.org/data/2.5/weather?q=Madurai&APPID=e890e5f43e3114ad60f6c64ccacbd4e3'
     //       )
     //     .then(response => {
-    //       const posts = response.data;
-    //       const temp = response.data.main;
-    //       const desc =  response.data.weather[0];
-    //       console.log(response.data);
-    //       this.setState({posts:posts, temp: temp, desc: desc});
-    //       this.get_weather(desc.id);
+        //   const posts = response.data;
+        //   const temp = response.data.main;
+        //   const desc =  response.data.weather[0];
+        //   console.log(response.data);
+        //   this.setState({posts:posts, temp: temp, desc: desc});
+        //   this.get_weather(desc.id);
           
     //           });
     //         }
