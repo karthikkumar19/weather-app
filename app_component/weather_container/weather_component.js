@@ -1,6 +1,6 @@
 import React from 'react';
 
-const weather =(props) =>{
+const weatherComponent =(props) =>{
     return(
         <div className="container">
             <div className="cards pt-4">
@@ -25,4 +25,4 @@ const weather =(props) =>{
    
 }
 
-export default weather;
+export default weatherComponent;
