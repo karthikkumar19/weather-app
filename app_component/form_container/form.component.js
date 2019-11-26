@@ -4,12 +4,21 @@ import './form.style.css';
 class Form extends React.Component{
 
 state={
-    lang:"hello"
+    lang:"hello",city:''
 }
 handleLangChange = (e) =>{
     var lang = this.state.lang;
+    var city= this.state.city;
+    console.log(city);
     this.props.onSelectLanguage(e,lang);
 }
+
+handleChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
+
     render(){
        
         return(
@@ -17,7 +26,7 @@ handleLangChange = (e) =>{
                 <form>
                 <div className="row">
                     <div className="col-md-3 offset-md-2">
-                        <input type="text" className="form-control" name="city" autoComplete="off" placeholder="City"/>
+                        <input type="text" className="form-control" name="city" autoComplete="off" placeholder="City" onChange={this.handleChange}/>
                     </div>
                     <div className="col-md-3">
                         <input type="text" className="form-control" name="country" autoComplete="off" placeholder="Country" />

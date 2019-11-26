@@ -7,7 +7,7 @@ class Weather extends React.Component{
     
     componentDidUpdate(){
         if(this.props.check != this.state.check){
-        axios.get('http://api.openweathermap.org/data/2.5/weather?q='+(this.props.name)+'&APPID=e890e5f43e3114ad60f6c64ccacbd4e3')
+        axios.get('http://api.openweathermap.org/data/2.5/weather?q='+(this.props.name)+'&APPID=3f5889b3f565906af583893091da7776')
         .then(response => {
             const posts = response.data;
             const temp = response.data.main;
