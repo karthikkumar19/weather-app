@@ -13,7 +13,8 @@ class App extends React.Component{
   constructor (props){
     super(props);
     this.state={
-      clicked:false
+      clicked:false,
+      city:''
     }
   }
   
@@ -25,11 +26,12 @@ class App extends React.Component{
 
 // }
 
-handleLanguage = (e,lang) =>{
+handleLanguage = (e,lang,city) =>{
   e.preventDefault();
   let state = this.state.clicked;
-  this.setState({clicked:true});
-console.log(state,lang);
+
+  this.setState({clicked:true,city:city});
+console.log(state,lang,city);
 
 }
 
@@ -40,7 +42,7 @@ console.log(state,lang);
     return(
 <div className="App">
   <Form onSelectLanguage={this.handleLanguage} />
-  <Weather check={this.state.clicked} name={"Leh"}/>  
+  <Weather check={this.state.clicked} name={this.state.city}/>  
     </div>
 
     );

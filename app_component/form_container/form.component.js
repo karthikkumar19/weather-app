@@ -10,7 +10,7 @@ handleLangChange = (e) =>{
     var lang = this.state.lang;
     var city= this.state.city;
     console.log(city);
-    this.props.onSelectLanguage(e,lang);
+    this.props.onSelectLanguage(e,lang,city);
 }
 
 handleChange = (e) => {
