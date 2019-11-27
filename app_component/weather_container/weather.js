@@ -4,30 +4,39 @@ import WeatherComponent from './weather_component';
 
 class Weather extends React.Component{
 
+  state={
+    posts:[],temp:[],desc:[],id:null,
+    weathericon:undefined,
+    error:false,
+    check:false,
+    visible:false,
+    city:''
+  };
     
     componentDidUpdate(){
-        if(this.props.check != this.state.check || this.props.name != this.state.city){
+      if(this.props.name === ''){
+        alert("Please enter the city name");
+      }else{
+        if(this.props.check !== this.state.check || this.props.name !== this.state.city){
         axios.get('http://api.openweathermap.org/data/2.5/weather?q='+(this.props.name)+'&APPID=e890e5f43e3114ad60f6c64ccacbd4e3')
         .then(response => {
             const posts = response.data;
             const temp = response.data.main;
             const desc =  response.data.weather[0];
             console.log(response.data);
-            this.setState({posts:posts, temp: temp, desc: desc,check:true,city:this.props.name});
+            this.setState({posts:posts, temp: temp, desc: desc,check:true,city:this.props.name,error:false,visible:true});
             this.get_weather(desc.id);
         })
+        .catch(error => {
+          this.setState({error:true,check:true,city:this.props.name,visible:false})
+        })
         }
+      }
 }
 
 
 
-    state={
-        posts:[],temp:[],desc:[],id:null,
-        weathericon:undefined,
-        getweather:false,
-        check:false,
-        city:''
-      };
+    
     
     get_weather =(rangeid)=>{
       console.log(rangeid);
@@ -69,43 +78,19 @@ class Weather extends React.Component{
       let cell = Math.floor(temp-273.15);
       return cell;
     }
-
-    
-    
-    // gettingweather=(id)=>{
-    //   // e.preventDefault();
-    // // let state = this.state.getweather;
-    // // //  id = this.state.id;
-    // // console.log(this.state.getweather);
-    // console.log(id);
-    // // this.setState({getweather:!state,id:id});
-    // console.log("true is updated"+ id);
-    // }
-
-    // componentDidMount (){
-    //     axios.get(
-    //       'http://api.openweathermap.org/data/2.5/weather?q=Madurai&APPID=e890e5f43e3114ad60f6c64ccacbd4e3'
-    //       )
-    //     .then(response => {
-        //   const posts = response.data;
-        //   const temp = response.data.main;
-        //   const desc =  response.data.weather[0];
-        //   console.log(response.data);
-        //   this.setState({posts:posts, temp: temp, desc: desc});
-        //   this.get_weather(desc.id);
-          
-    //           });
-    //         }
-clickhere=()=>{
-    this.setState({getweather:true});
-}
-
     render(){
+      let isChecked = this.state.visible;
+      
         return(
             <div className="weather-main">
- <WeatherComponent name={this.state.posts.name} temp={this.calCelsius(this.state.temp.temp)}
-      min={this.calCelsius(this.state.temp.temp_min)} max={this.calCelsius(this.state.temp.temp_max)}
-      desc={this.state.desc.main} className={this.state.weathericon} /> 
+              {
+                this.state.error ? (<p > Please enter the valid city name</p>) : null}
+              {
+                isChecked ? (<WeatherComponent name={this.state.posts.name} temp={this.calCelsius(this.state.temp.temp)}
+                min={this.calCelsius(this.state.temp.temp_min)} max={this.calCelsius(this.state.temp.temp_max)}
+                desc={this.state.desc.main} className={this.state.weathericon} /> ) : null
+              }
+            
             </div>
         )
     }
