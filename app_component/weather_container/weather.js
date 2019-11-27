@@ -12,6 +12,8 @@ class Weather extends React.Component{
     visible:false,
     city:''
   };
+
+  
     
     componentDidUpdate(){
       if(this.props.name === ''){
@@ -74,6 +76,7 @@ class Weather extends React.Component{
         Clouds:'wi wi-day-fog display-1'
       };
     
+
     calCelsius(temp){
       let cell = Math.floor(temp-273.15);
       return cell;
@@ -84,7 +87,7 @@ class Weather extends React.Component{
         return(
             <div className="weather-main">
               {
-                this.state.error ? (<p > Please enter the valid city name</p>) : null}
+                this.state.error ? (<p style={{color:'white'}}> Please enter the valid city name</p>) : null}
               {
                 isChecked ? (<WeatherComponent name={this.state.posts.name} temp={this.calCelsius(this.state.temp.temp)}
                 min={this.calCelsius(this.state.temp.temp_min)} max={this.calCelsius(this.state.temp.temp_max)}
