@@ -2,12 +2,12 @@
     margin-top:3rem;
 }
 
-form input[name="city"],
-form input[name="country"]{
+form input[name="city"]{
     background-color: transparent;
     color: white !important;
     border: 0;
-    border-bottom: 2px solid whitesmoke;
+    font-size: 20px;
+    border-bottom: 2px solid white;
     border-radius: 0;
 }
 
@@ -18,5 +18,5 @@ form input:focus{
 
 form input::placeholder
 {
-    color:white !important;
+    color:gainsboro !important;
 }
